@@ -15,7 +15,10 @@
 
     animation: kuromiFloat 3s ease-in-out infinite;
 
-    pointer-events: none;
+    pointer-events: auto;
+touch-action: none;
+cursor: grab;
+user-select: none;
 }
 
 .kuromi.left {
@@ -42,15 +45,19 @@
     box-sizing: border-box;
 }
 
+
+  
 body {
     min-height: 100vh;
     font-family: "Segoe UI", sans-serif;
     color: white;
 
-    background:
-        radial-gradient(circle at top left, #c4b5fd, transparent 45%),
-        radial-gradient(circle at bottom right, #93c5fd, transparent 45%),
-        linear-gradient(135deg, #b9a7f5, #9fc5f8);
+  
+      background:
+    radial-gradient(circle at 20% 20%, rgba(167, 139, 250, 0.35), transparent 25%),
+    radial-gradient(circle at 80% 30%, rgba(96, 165, 250, 0.25), transparent 25%),
+    radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.3), transparent 35%),
+    linear-gradient(135deg, #080018, #16002f, #090d2e);
 
     display: flex;
     justify-content: center;
@@ -60,6 +67,7 @@ body {
 }
 
 .container {
+  
     width: 90%;
     max-width: 680px;
 
@@ -333,13 +341,22 @@ button:hover {
 
 }
 
+.sparkle {
+    position: fixed;
+    color: white;
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.8;
+}
+  
 </style>
 
 </head>
 
 <body>
-<img src="images/kuromi.webp" class="kuromi left">
-<img src="images/kuromi.webp" class="kuromi right">
+<img src="images/kuromi.png" class="kuromi left">
+<img src="images/kuromi.png" class="kuromi right">
 <div class="container">
 
     <div class="heart">💜</div>
@@ -883,6 +900,53 @@ function createManyHearts() {
 
 }
 
+
+document.querySelectorAll(".kuromi").forEach(function(kuromi) {
+
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    kuromi.addEventListener("pointerdown", function(e) {
+
+        dragging = true;
+
+        kuromi.style.animation = "none";
+        kuromi.style.cursor = "grabbing";
+
+        const rect = kuromi.getBoundingClientRect();
+
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        kuromi.setPointerCapture(e.pointerId);
+
+    });
+
+    kuromi.addEventListener("pointermove", function(e) {
+
+        if (!dragging) return;
+
+        kuromi.style.left =
+            (e.clientX - offsetX) + "px";
+
+        kuromi.style.top =
+            (e.clientY - offsetY) + "px";
+
+        kuromi.style.right = "auto";
+        kuromi.style.bottom = "auto";
+
+    });
+
+    kuromi.addEventListener("pointerup", function() {
+
+        dragging = false;
+        kuromi.style.cursor = "grab";
+
+    });
+
+});
+  
 </script>
 
 </body>
