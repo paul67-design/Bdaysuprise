@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You 💜</title>
+
+<style>
+.kuromi {
+    position: fixed;
+    width: 115px;
+    bottom: 20px;
+    z-index: 10;
+
+    animation: kuromiFloat 3s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+.kuromi.left {
+    left: 15px;
+}
+
+.kuromi.right {
+    right: 15px;
+    animation-delay: 1s;
+}
+
+@keyframes kuromiFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+          }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(circle at top left, #c4b5fd, transparent 45%),
+        radial-gradient(circle at bottom right, #93c5fd, transparent 45%),
+        linear-gradient(135deg, #b9a7f5, #9fc5f8);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 680px;
+
+    text-align: center;
+
+    padding: 45px 30px;
+
+    margin: 30px 0;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 0 45px rgba(100,70,255,0.35);
+}
+
+.heart {
+    font-size: 65px;
+
+    animation: heartbeat 1.5s infinite;
+
+    margin-bottom: 15px;
+}
+
+@keyframes heartbeat {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+}
+
+h1 {
+    font-size: 34px;
+
+    margin-bottom: 15px;
+
+    background: linear-gradient(
+        90deg,
+        #e9d5ff,
+        #93c5fd
+    );
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+}
+
+.subtitle {
+    font-size: 17px;
+
+    line-height: 1.6;
+
+    opacity: 0.9;
+
+    margin-bottom: 30px;
+}
+
+button {
+    border: none;
+
+    padding: 15px 30px;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: white;
+
+    cursor: pointer;
+
+    background: linear-gradient(
+        90deg,
+        #7c3aed,
+        #2563eb
+    );
+
+    box-shadow:
+        0 0 20px rgba(99,102,241,0.5);
+
+    transition: 0.25s;
+
+    margin-top: 15px;
+}
+
+button:hover {
+    transform: scale(1.06);
+
+    box-shadow:
+        0 0 30px rgba(129,140,248,0.8);
+}
+
+#message {
+    margin-top: 25px;
+
+    font-size: 18px;
+
+    min-height: 30px;
+
+    color: #ddd6fe;
+}
+
+.counter {
+    margin-top: 15px;
+
+    font-size: 13px;
+
+    opacity: 0.6;
+}
+
+/* BIRTHDAY MESSAGE */
+
+#birthday {
+    display: none;
+
+    margin-top: 35px;
+
+    text-align: left;
+
+    animation: fadeIn 1s ease;
+}
+
+.birthday-box {
+    padding: 25px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.08);
+
+    border-left: 4px solid #a78bfa;
+
+    line-height: 1.8;
+
+    font-size: 16px;
+}
+
+.birthday-title {
+    text-align: center;
+
+    font-size: 26px;
+
+    margin-bottom: 20px;
+
+    color: #e9d5ff;
+}
+
+.read-first {
+    text-align: center;
+
+    font-size: 14px;
+
+    opacity: 0.7;
+
+    margin-bottom: 15px;
+}
+
+/* REASONS */
+
+#reasonsSection {
+    display: none;
+
+    margin-top: 35px;
+}
+
+.reason {
+    padding: 15px 18px;
+
+    margin: 10px 0;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.08);
+
+    border-left: 3px solid #a78bfa;
+
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    animation: appear 0.6s forwards;
+
+    line-height: 1.5;
+
+    text-align: left;
+}
+
+@keyframes appear {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* FINAL MESSAGE */
+
+.final {
+    display: none;
+
+    margin-top: 35px;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.08);
+
+    line-height: 1.8;
+
+    font-size: 19px;
+
+    color: #e9d5ff;
+}
+
+/* FLOATING HEARTS */
+
+.floating-heart {
+
+    position: fixed;
+
+    bottom: -30px;
+
+    pointer-events: none;
+
+    animation: floatUp 6s linear forwards;
+
+    opacity: 0.7;
+}
+
+@keyframes floatUp {
+
+    from {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+<img src="images/kuromi.webp" class="kuromi left">
+<img src="images/kuromi.webp" class="kuromi right">
+<div class="container">
+
+    <div class="heart">💜</div>
+
+    <h1>Hey, my babyy jeniee💜🩵</h1>
+
+    <p class="subtitle">
+        I HAVEE SMTHH FOR YOHU.<br>
+        But first... you have to earn it, oki?😏
+    </p>
+
+    <button id="clickButton" onclick="clicked()">
+        CLICK ME
+    </button>
+
+    <div id="message">
+        Don't worryy, walang jumpscare yan
+    </div>
+
+    <div class="counter" id="counter">
+        Clicks: 0 / 9
+    </div>
+
+
+    <!-- BIRTHDAY MESSAGE -->
+
+    <div id="birthday">
+
+        <p class="read-first">
+            READ THIS FIRST!😏
+        </p>
+
+        <div class="birthday-box">
+
+            <h2 class="birthday-title">
+                Happy Birthday babyyy!💜🎂
+            </h2>
+
+            <p>
+                Happy birthday to one of the most genuine,
+                beautiful, funny, and cutest person I've ever met
+            </p>
+
+            <br>
+
+            <p>
+                I hope today reminds you of how loved and
+                appreciated you areee my babyy. You deserve all the happiness,
+                laughter, and good things that come your way hhehe:3
+            </p>
+
+            <br>
+
+            <p>
+                I know I don't always know the perfect things to say,
+                but I want you to know that I genuinely appreciate you soo much.
+                Thank youuu for being yourself, for always trying your
+                best, and for doing everything you can to reassure me( im a lil bit jealousy kasi:) hehe).
+            </p>
+
+            <br>
+
+            <p>
+                You're an independent woman with your own dreams,
+                goals, and strengths, and that's something I really
+                admire about you. You don't need anyone to define
+                who you are because you already know your worth.
+            </p>
+
+            <br>
+
+            <p>
+                You're also effortlessly gorgeous, and somehow
+                you're even funnier than you are baby.😏😏 
+                I love the random moments, the jokes, the conversations,
+                and all the little things that make you who you are.
+            </p>
+
+            <br>
+
+            <p>
+                I hope you continue chasing your dreams,
+                becoming the person you want to be,
+                and enjoying every little moment life gives you.
+            </p>
+
+            <br>
+
+            <p>
+                Thank you for being you.
+                And once again...
+            </p>
+
+            <br>
+
+            <p style="text-align:center; font-size:21px;">
+                <strong>Happy birthdayyyy jenloveydoveyhoney💜🎂</strong>
+            </p>
+
+        </div>
+
+        <div style="text-align:center;">
+
+            <button onclick="showReasons()">
+                Okay, soo, remember the day na sabi k sayo gagawa me ng 100reasons? eto na yonHEHEHEHEH😏
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- 100 REASONS -->
+
+    <div id="reasonsSection">
+
+        <h2 style="margin-bottom:20px; color:#e9d5ff;">
+            100 Reasons Why I Love You Jen 💜
+        </h2>
+
+        <div id="reasons"></div>
+
+        <div class="final" id="finalMessage">
+
+            I could write another 100 reasons,
+            and it still wouldn't be enough.
+
+            <br><br>
+
+            You're genuine.<br>
+            You're effortlessly gorgeous.<br>
+            You're funny.<br>
+            You're caring.<br>
+            You're independent.<br>
+            You're strong.
+
+            <br><br>
+
+            But most importantly...
+
+            <br><br>
+
+            <strong>
+                You're you, ikaw na yan eh:3!💜
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let clicks = 0;
+
+const messages = [
+
+    "HAHAHAHAHAHAHA CLINICK MO TALAGA?😭",
+
+    "andali mo talagang mauto baby",
+
+    "HALAA PROMISE WALA TO HAHAHAHA",
+
+    "ETOOOO NAAAAAAAAAAA",
+
+    "LOLLL JOKE LANG WALA TALAGAAA HAHAHAHAH",
+
+    "TALAGANG GUSTO MO EH NO HAHAHAHAH",
+
+    "BOOOOOOOOOOOOOOOOO ETO NA TALAGA ",
+
+    "LAST NAAA PROMISEE HEHEHE",
+
+    "Okay okay tama na, eto na😋"
+
+];
+
+
+function clicked() {
+
+    clicks++;
+
+    document.getElementById("counter").innerText =
+        "Clicks: " + clicks + " / 9";
+
+
+    if (clicks < 9) {
+
+        document.getElementById("message").innerText =
+            messages[clicks - 1];
+
+        createHeart();
+
+    }
+
+
+    if (clicks === 9) {
+
+        document.getElementById("message").innerText =
+            messages[8];
+
+        document.getElementById("clickButton").style.display =
+            "none";
+
+        document.getElementById("counter").style.display =
+            "none";
+
+        document.getElementById("birthday").style.display =
+            "block";
+
+        createManyHearts();
+
+        setTimeout(() => {
+
+            document.getElementById("birthday")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }, 300);
+
+    }
+
+}
+
+
+const reasons = [
+
+"Because you're genuine.",
+
+"Because you never have to pretend to be someone you're not.",
+
+"Because I know your feelings are real.",
+
+"Because you always do everything you can to reassure me.",
+
+"Because you make an effort to make me feel secure.",
+
+"Because you understand me when I overthink.",
+
+"Because you don't make me feel bad for having worries.",
+
+"Because you know how to calm me down.",
+
+"Because you make me feel cared for.",
+
+"Because you make me feel important.",
+
+"Because you're effortlessly gorgeous.",
+
+"Because you don't even have to try to look beautiful.",
+
+"Because your beauty feels completely natural.",
+
+"Because you can look amazing without even realizing it.",
+
+"Because your smile can instantly make my day better.",
+
+"Because your personality makes you even more beautiful.",
+
+"Because you're genuinely funny.",
+
+"Because you can make me laugh without even trying.",
+
+"Because your random jokes are hilarious.",
+
+"Because you can turn a boring conversation into something fun.",
+
+"Because talking to you never gets boring.",
+
+"Because I love your sense of humor.",
+
+"Because I love your random thoughts.",
+
+"Because I love your little quirks.",
+
+"Because I love the way you talk.",
+
+"Because I love your reactions.",
+
+"Because I love seeing you get excited.",
+
+"Because I love hearing your stories.",
+
+"Because I love our random conversations.",
+
+"Because I love our inside jokes.",
+
+"Because you listen to me.",
+
+"Because you care about what I feel.",
+
+"Because you take my feelings seriously.",
+
+"Because you try to understand me.",
+
+"Because you don't just say you care — you show it.",
+
+"Because your actions speak louder than words.",
+
+"Because you put effort into us.",
+
+"Because you make me feel appreciated.",
+
+"Because you make me feel understood.",
+
+"Because you make me feel valued.",
+
+"Because you make me feel comfortable being myself.",
+
+"Because I don't have to pretend around you.",
+
+"Because I can tell you what's on my mind.",
+
+"Because you trust me with your thoughts.",
+
+"Because you let me into your world.",
+
+"Because you make me feel lucky.",
+
+"Because you make me want to become better.",
+
+"Because you inspire me to grow.",
+
+"Because you're an independent woman.",
+
+"Because you know how to stand on your own.",
+
+"Because you have your own dreams and goals.",
+
+"Because you know your worth.",
+
+"Because you don't need someone else to define you.",
+
+"Because I admire your strength.",
+
+"Because I admire your confidence.",
+
+"Because I admire the person you're becoming.",
+
+"Because you're capable of so much.",
+
+"Because you have your own mind.",
+
+"Because you know what you want.",
+
+"Because you can take care of yourself.",
+
+"Because I admire your independence.",
+
+"Because you're strong even when things aren't easy.",
+
+"Because you keep trying.",
+
+"Because you don't give up easily.",
+
+"Because you're patient with me.",
+
+"Because you're thoughtful.",
+
+"Because you're kind.",
+
+"Because you're honest.",
+
+"Because you care about the people you love.",
+
+"Because you make simple moments special.",
+
+"Because you make ordinary days better.",
+
+"Because you make me smile without even trying.",
+
+"Because seeing your name on my phone makes me happy.",
+
+"Because I love receiving messages from you.",
+
+"Because I love hearing about your day.",
+
+"Because I love telling you about mine.",
+
+"Because I love spending time talking to you.",
+
+"Because time feels faster when I'm with you.",
+
+"Because hours of talking can feel like minutes.",
+
+"Because you can make stressful days feel lighter.",
+
+"Because you make happiness feel simple.",
+
+"Because you make little things matter.",
+
+"Because you make memories more meaningful.",
+
+"Because I love every laugh we've shared.",
+
+"Because I love every conversation we've had.",
+
+"Because I love every memory we've made.",
+
+"Because I appreciate every effort you've made.",
+
+"Because I appreciate every reassurance you've given me.",
+
+"Because you make me feel like I matter.",
+
+"Because you make me feel like I'm enough.",
+
+"Because I love seeing you happy.",
+
+"Because your happiness matters to me.",
+
+"Because I want to support your dreams.",
+
+"Because I want to see you succeed.",
+
+"Because I want to keep making memories with you.",
+
+"Because knowing you has changed me.",
+
+"Because knowing you taught me what genuine care feels like.",
+
+"Because you've become someone incredibly important to me.",
+
+"Because there's always something new about you to appreciate.",
+
+"Because I could keep listing reasons forever.",
+
+"Because 100 reasons still don't feel like enough.",
+
+"Because I love everything that makes you uniquely you.",
+
+"Because I wouldn't want you to change who you are.",
+
+"Because you're beautiful inside and out.",
+
+"Because you're funny, genuine, strong, caring, and independent.",
+
+"Because you're the person you are.",
+
+"And most importantly... because you're YOU, ikaw na yan e💜"
+
+];
+
+
+function showReasons() {
+
+    document.getElementById("reasonsSection")
+        .style.display = "block";
+
+    const container =
+        document.getElementById("reasons");
+
+    reasons.forEach((reason, index) => {
+
+        setTimeout(() => {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "reason";
+
+            div.innerHTML =
+                "<strong>" +
+                (index + 1) +
+                ".</strong> " +
+                reason;
+
+            container.appendChild(div);
+
+            window.scrollTo({
+
+                top: document.body.scrollHeight,
+
+                behavior: "smooth"
+
+            });
+
+        }, index * 180);
+
+    });
+
+
+    setTimeout(() => {
+
+        document.getElementById("finalMessage")
+            .style.display = "block";
+
+    }, reasons.length * 180 + 700);
+
+    createManyHearts();
+
+}
+
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    heart.innerHTML =
+        Math.random() > 0.5
+        ? "💜"
+        : "🩵";
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 25) + "px";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 7000);
+
+}
+
+
+function createManyHearts() {
+
+    for (let i = 0; i < 35; i++) {
+
+        setTimeout(() => {
+
+            createHeart();
+
+        }, i * 150);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
